@@ -1,8 +1,8 @@
 name: Build Linux AMD64 Musl Binary
 
-on:
+于:
   push:
-    tags:
+    标签:
       - 'v*'
   workflow_dispatch:
 
