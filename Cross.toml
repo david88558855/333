@@ -1,0 +1,10 @@
+# Cross 编译配置（可选，用于更复杂的交叉编译场景）
+
+[target.x86_64-unknown-linux-musl]
+image = "rust:1.75"
+
+[build.env]
+passthrough = [
+    "RUSTFLAGS",
+    "CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS",
+]

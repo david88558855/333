@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ video_title }} - KatelyaTV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .player-container {
+            background: #000;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+        
+        .video-info-section {
+            padding: 20px;
+        }
+        
+        .episode-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .episode-btn {
+            padding: 10px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .episode-btn.active {
+            background: #4ecca3;
+            color: white;
+        }
+        
+        .source-selector {
+            margin-bottom: 20px;
+        }
+        
+        .source-btn {
+            padding: 8px 16px;
+            margin-right: 10px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .source-btn.active {
+            background: #4ecca3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>KatelyaTV</h1>
+            </div>
+            <nav class="menu">
+                <a href="/" class="menu-item">首页</a>
+                <a href="/search" class="menu-item">搜索</a>
+                <a href="/favorites" class="menu-item">收藏</a>
+                <a href="/history" class="menu-item">历史</a>
+                <a href="/admin" class="menu-item">管理面板</a>
+                <a href="/config" class="menu-item">TVBox 配置</a>
+                <a href="/about" class="menu-item">关于</a>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="player-container">
+                <video class="video-player" controls autoplay>
+                    <source src="{{ video_url }}" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+
+            <div class="content">
+                <section class="section video-info-section">
+                    <h1>{{ video_title }}</h1>
+                    
+                    <div class="source-selector">
+                        <h3>选择播放源</h3>
+                        <div id="sourceButtons">
+                            <!-- 播放源按钮将通过 JS 加载 -->
+                        </div>
+                    </div>
+                    
+                    <div class="episodes">
+                        <h3>选集</h3>
+                        <div class="episode-list" id="episodeList">
+                            <!-- 剧集列表将通过 JS 加载 -->
+                        </div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn-primary" onclick="toggleFavorite()">加入收藏</button>
+                        <button class="btn-primary" onclick="reportIssue()">报错</button>
+                    </div>
+                    
+                    <div class="description">
+                        <h3>简介</h3>
+                        <p id="videoDescription">加载中...</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/player.js"></script>
+</body>
+</html>

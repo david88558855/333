@@ -1,0 +1,37 @@
+# Rust
+/target/
+**/target/
+/debug/
+
+# Build artifacts
+*.rlib
+*.dylib
+*.so
+*.pdb
+*.exe
+
+# Database
+*.db
+*.db-journal
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Config (if contains secrets)
+config.json
+config.secret.json

@@ -1,0 +1,8 @@
+{
+  "host": "0.0.0.0",
+  "port": 3000,
+  "database_url": "./katelyatv.db",
+  "jwt_secret": "your-secret-key-change-in-production",
+  "enable_register": false,
+  "admin_password": null
+}

@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - KatelyaTV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .about-content {
+            line-height: 1.8;
+        }
+        
+        .about-content h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ecca3;
+            font-weight: bold;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .tech-item strong {
+            color: #4ecca3;
+        }
+        
+        .links a {
+            color: #4ecca3;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>KatelyaTV</h1>
+            </div>
+            <nav class="menu">
+                <a href="/" class="menu-item">首页</a>
+                <a href="/search" class="menu-item">搜索</a>
+                <a href="/favorites" class="menu-item">收藏</a>
+                <a href="/history" class="menu-item">历史</a>
+                <a href="/admin" class="menu-item">管理面板</a>
+                <a href="/config" class="menu-item">TVBox 配置</a>
+                <a href="/about" class="menu-item active">关于</a>
+            </nav>
+            <div class="user-info">
+                {% if is_logged_in %}
+                <span class="username">{{ username }}</span>
+                <button id="logoutBtn" class="btn-logout">退出</button>
+                {% else %}
+                <a href="/login" class="btn-login">登录</a>
+                <a href="/register" class="btn-register">注册</a>
+                {% endif %}
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <header class="header">
+                <h1>关于 KatelyaTV</h1>
+            </header>
+
+            <div class="content">
+                <section class="section about-content">
+                    <h2>项目介绍</h2>
+                    <p>
+                        KatelyaTV Rust 是一个自托管的影视聚合播放器，使用 Rust语言开发，旨在提供安全、高效、易用的观影体验。
+                        本项目灵感来源于 KatelyaTV，采用 Rust重写，保留了原有的核心功能，并进行了优化和改进。
+                    </p>
+                    
+                    <h2>主要功能</h2>
+                    <ul class="feature-list">
+                        <li>多源聚合搜索：整合多个影视资源站，一键搜索全网内容</li>
+                        <li>高清流畅播放：支持多种视频格式和播放源</li>
+                        <li>智能跳过：支持手动设置跳过片头片尾时间段</li>
+                        <li>断点续播：自动记录播放进度，跨设备同步观看位置</li>
+                        <li>多用户系统：独立的用户数据，首个用户自动成为管理员</li>
+                        <li>收藏和历史：收藏喜欢的影视作品，记录观看历史</li>
+                        <li>TVBox 兼容：支持 TVBox 配置接口，可在电视盒子使用</li>
+                        <li>响应式设计：完美适配手机、平板、电脑各种屏幕</li>
+                    </ul>
+                    
+                    <h2>技术栈</h2>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <strong>后端框架</strong><br>
+                            Axum
+                        </div>
+                        <div class="tech-item">
+                            <strong>数据库</strong><br>
+                            SQLite (sqlx)
+                        </div>
+                        <div class="tech-item">
+                            <strong>模板引擎</strong><br>
+                            Askama
+                        </div>
+                        <div class="tech-item">
+                            <strong>认证</strong><br>
+                            JWT + Argon2
+                        </div>
+                        <div class="tech-item">
+                            <strong>前端</strong><br>
+                            HTML/CSS/JavaScript
+                        </div>
+                        <div class="tech-item">
+                            <strong>编译目标</strong><br>
+                            Linux AMD64 Musl
+                        </div>
+                    </div>
+                    
+                    <h2>部署说明</h2>
+                    <p>
+                        本项目编译后为单个静态二进制文件，无需任何外部依赖，下载后即可运行。
+                        默认端口为 3000，可通过参数修改。数据库使用 SQLite，自动创建在项目目录下。
+                    </p>
+                    <p>
+                        首次运行时，访问网站后注册第一个账号，该账号将自动成为管理员。
+                        注册完成后，注册功能将自动关闭，管理员可在管理面板手动开启。
+                    </p>
+                    
+                    <h2>相关链接</h2>
+                    <div class="links">
+                        <a href="https://github.com/haogege8888/KatelyaTV" target="_blank">原项目 KatelyaTV</a>
+                        <a href="https://github.com/tokio-rs/axum" target="_blank">Axum 框架</a>
+                        <a href="https://www.rust-lang.org/" target="_blank">Rust 官网</a>
+                    </div>
+                    
+                    <h2>许可证</h2>
+                    <p>MIT License</p>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 退出登录
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>

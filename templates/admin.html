@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理面板 - KatelyaTV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>KatelyaTV</h1>
+            </div>
+            <nav class="menu">
+                <a href="/" class="menu-item">首页</a>
+                <a href="/search" class="menu-item">搜索</a>
+                <a href="/favorites" class="menu-item">收藏</a>
+                <a href="/history" class="menu-item">历史</a>
+                <a href="/admin" class="menu-item active">管理面板</a>
+                <a href="/config" class="menu-item">TVBox 配置</a>
+                <a href="/about" class="menu-item">关于</a>
+            </nav>
+            <div class="user-info">
+                <span class="username">{{ username }}</span>
+                <button id="logoutBtn" class="btn-logout">退出</button>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <header class="header">
+                <h1>管理面板</h1>
+            </header>
+
+            <div class="content">
+                <!-- 用户管理 -->
+                <section class="section">
+                    <h2>用户管理</h2>
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h3>开放注册</h3>
+                                <p>允许新用户注册（首个用户注册后默认关闭）</p>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="enableRegisterToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 视频源管理 -->
+                <section class="section">
+                    <h2>视频源管理</h2>
+                    <button class="btn-primary" onclick="showAddSourceModal()">添加视频源</button>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>API 地址</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th>排序</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sourcesTableBody">
+                            <!-- 数据将通过 JS 加载 -->
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 添加/编辑视频源模态框 -->
+                <div id="sourceModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeSourceModal()">&times;</span>
+                        <h2 id="modalTitle">添加视频源</h2>
+                        <form id="sourceForm" class="auth-form">
+                            <input type="hidden" id="sourceId">
+                            <div class="form-group">
+                                <label for="sourceName">名称</label>
+                                <input type="text" id="sourceName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceUrl">API 地址</label>
+                                <input type="url" id="sourceUrl" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceType">类型</label>
+                                <select id="sourceType">
+                                    <option value="cms">CMS</option>
+                                    <option value="custom">自定义</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceActive">状态</label>
+                                <select id="sourceActive">
+                                    <option value="true">启用</option>
+                                    <option value="false">禁用</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceOrder">排序</label>
+                                <input type="number" id="sourceOrder" value="0">
+                            </div>
+                            <button type="submit" class="btn-primary btn-full">保存</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

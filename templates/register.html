@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - KatelyaTV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1>KatelyaTV</h1>
+            <h2>用户注册</h2>
+            
+            {% if registration_open %}
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required autocomplete="new-password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">确认密码</label>
+                    <input type="password" id="confirmPassword" name="confirm_password" required autocomplete="new-password">
+                </div>
+                
+                <button type="submit" class="btn-primary btn-full">注册</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>已有账号？<a href="/login">立即登录</a></p>
+                <p><a href="/">返回首页</a></p>
+            </div>
+            
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            {% else %}
+            <div class="notice">
+                <p>当前注册功能已关闭</p>
+                <p>请联系管理员开通账号</p>
+                <p><a href="/">返回首页</a></p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+</body>
+</html>

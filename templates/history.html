@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观看历史 - KatelyaTV</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .history-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: background 0.3s;
+        }
+        
+        .history-item:hover {
+            background: #f9f9f9;
+        }
+        
+        .history-poster {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+        
+        .history-info {
+            flex: 1;
+        }
+        
+        .history-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+        
+        .history-meta {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #4ecca3;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        
+        .progress-text {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .history-actions {
+            margin-top: 15px;
+        }
+        
+        .btn-continue {
+            padding: 8px 20px;
+            background: #4ecca3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .btn-delete {
+            padding: 8px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .clear-all {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .btn-clear {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            color: #666;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-clear:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>KatelyaTV</h1>
+            </div>
+            <nav class="menu">
+                <a href="/" class="menu-item">首页</a>
+                <a href="/search" class="menu-item">搜索</a>
+                <a href="/favorites" class="menu-item">收藏</a>
+                <a href="/history" class="menu-item active">历史</a>
+                <a href="/admin" class="menu-item">管理面板</a>
+                <a href="/config" class="menu-item">TVBox 配置</a>
+                <a href="/about" class="menu-item">关于</a>
+            </nav>
+            <div class="user-info">
+                {% if is_logged_in %}
+                <span class="username">{{ username }}</span>
+                <button id="logoutBtn" class="btn-logout">退出</button>
+                {% else %}
+                <a href="/login" class="btn-login">登录</a>
+                <a href="/register" class="btn-register">注册</a>
+                {% endif %}
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <header class="header">
+                <h1>观看历史</h1>
+            </header>
+
+            <div class="content">
+                <section class="section">
+                    <div class="clear-all" id="clearAllSection" style="display: none;">
+                        <button class="btn-clear" onclick="clearAllHistory()">🗑️ 清空全部历史</button>
+                    </div>
+                    
+                    <div id="historyContent">
+                        <!-- 历史记录将通过 JS 加载 -->
+                    </div>
+                    
+                    <div id="noHistory" style="display: none; text-align: center; padding: 60px 20px;">
+                        <p style="font-size: 48px; margin-bottom: 20px;">📺</p>
+                        <p style="color: #888; margin-bottom: 20px;">暂无观看历史</p>
+                        <a href="/" class="btn-primary">去首页看看</a>
+                    </div>
+                    
+                    <div id="needLogin" style="display: none; text-align: center; padding: 60px 20px;">
+                        <p style="font-size: 48px; margin-bottom: 20px;">🔒</p>
+                        <p style="color: #888; margin-bottom: 20px;">请先登录后查看历史记录</p>
+                        <a href="/login" class="btn-primary">立即登录</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/history.js"></script>
+</body>
+</html>
